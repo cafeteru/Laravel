@@ -11,16 +11,11 @@
 |
 */
 
-Route::get('/', ['as' => 'welcome', function () {
-    return view('welcome');
-}]);
+$pagina = "ExampleController@";
 
-Route::get('/nombre', ['as' => 'nombre', function () {
-    echo "Url Nombre";
-}]);
+Route::get('/', ['as' => 'welcome', 'uses' => $pagina . 'home']);
 
-Route::get('/nombre/{nombre?}', ['as' => 'saludo',
-    function ($nombre = "invitado") {
-        $consolas = ['PS4', 'XOne'];
-        return view('saludo', compact('nombre', 'consolas'));
-    }])->where('nombre', "[a-zA-ZáéíóúñÁÉÍÓÚÑ]*");
+Route::get('/nombre', ['as' => 'nombre', 'uses' => $pagina . 'nombre']);
+
+Route::get('/nombre/{nombre?}', ['as' => 'saludo', 'uses' => $pagina . 'saludar'
+])->where('nombre', "[a-zA-ZáéíóúñÁÉÍÓÚÑ]*");
