@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', ['as' => 'welcome', function () {
     return view('welcome');
-});
+}]);
+
+Route::get('/nombre', ['as' => 'nombre', function () {
+    echo "Url Nombre";
+}]);
+
+Route::get('/nombre/{nombre?}', ['as' => 'saludo',
+    function ($nombre = "invitado") {
+        $consolas = ['PS4', 'XOne'];
+        return view('saludo', compact('nombre', 'consolas'));
+    }])->where('nombre', "[a-zA-ZáéíóúñÁÉÍÓÚÑ]*");
